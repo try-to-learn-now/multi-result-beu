@@ -1,6 +1,4 @@
 {
-  "rewrites": [
-    { "source": "/regular/api/(.*)", "destination": "/regular/api/$1" },
-    { "source": "/le/api/(.*)", "destination": "/le/api/$1" }
-  ]
+  "version": 2,
+  "routes": []
 }
