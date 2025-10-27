@@ -1,0 +1,11 @@
+{
+  "name": "multi-result-beu",
+  "version": "1.0.0",
+  "main": "api/result.js",
+  "scripts": {
+    "start": "node api/result.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
