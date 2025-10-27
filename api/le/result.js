@@ -37,6 +37,7 @@ async function fetchSingleResult(regNo, year, semesterRoman, encodedExamHeld) {
     }
 
     return { status: 'success', regNo, data: jsonData.data };
+
   } catch (error) {
     clearTimeout(timeoutId);
     const reason = error.name === 'AbortError' ? 'Request Timed Out' : `Fetch Error: ${error.message}`;
@@ -61,7 +62,7 @@ export default async function handler(req, res) {
 
   const { reg_no, year, semester, exam_held } = req.query;
 
-  // FIXED regex: Use d for digits, not d
+  // Correct regex: d matches digits
   if (!reg_no || !/^d{11}$/.test(reg_no)) {
     return res.status(400).json({ error: 'Invalid parameter. Use "reg_no" with a full 11-digit number.' });
   }
@@ -71,7 +72,7 @@ export default async function handler(req, res) {
   }
 
   const normalizedSemester = semester?.toUpperCase();
-  const romanMap = { 'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6, 'VII': 7, 'VIII': 8 };
+  const romanMap = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8 };
   if (!normalizedSemester || !romanMap[normalizedSemester]) {
     return res.status(400).json({ error: 'Missing or invalid "semester" parameter (use Roman numerals I-VIII).' });
   }
@@ -92,7 +93,7 @@ export default async function handler(req, res) {
   const endNum = startNum + BATCH_SIZE - 1;
 
   for (let i = startNum; i <= endNum; i++) {
-    const suffix = (i >= 900) ? i.toString() : i.toString().padStart(3, '0');
+    const suffix = i >= 900 ? i.toString() : i.toString().padStart(3, '0');
     registrationNumbers.push(`${prefix}${suffix}`);
   }
 
