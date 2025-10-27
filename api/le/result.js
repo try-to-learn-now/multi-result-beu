@@ -61,6 +61,7 @@ export default async function handler(req, res) {
 
   const { reg_no, year, semester, exam_held } = req.query;
 
+  // FIXED regex: Use d for digits, not d
   if (!reg_no || !/^d{11}$/.test(reg_no)) {
     return res.status(400).json({ error: 'Invalid parameter. Use "reg_no" with a full 11-digit number.' });
   }
