@@ -1,7 +1,6 @@
 {
-  "version": 2,
-  "routes": [
-    { "src": "/regular/api/(.*)", "dest": "/regular/api/$1" },
-    { "src": "/le/api/(.*)", "dest": "/le/api/$1" }
+  "rewrites": [
+    { "source": "/regular/api/(.*)", "destination": "/regular/api/$1" },
+    { "source": "/le/api/(.*)", "destination": "/le/api/$1" }
   ]
 }
